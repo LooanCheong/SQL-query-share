@@ -1,6 +1,7 @@
 package single.sqlshare.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -22,4 +23,13 @@ public class Post {
 
     @Column(columnDefinition = "TEXT")
     private String content;
+
+    @Builder
+    public Post(Long id, String password, LocalDateTime postTime, String questionLink, String content) {
+        this.id = id;
+        this.password = password;
+        this.postTime = postTime;
+        this.questionLink = questionLink;
+        this.content = content;
+    }
 }
