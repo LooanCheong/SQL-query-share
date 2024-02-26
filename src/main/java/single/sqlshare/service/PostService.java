@@ -14,7 +14,7 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    public Long write(Post post) {
+    public Long save(Post post) {
         postRepository.save(post);
         return post.getId();
     }
