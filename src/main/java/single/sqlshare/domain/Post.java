@@ -24,6 +24,9 @@ public class Post {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    public Post() {
+    }
+
     @Builder
     public Post(Long id, String password, LocalDateTime postTime, String questionLink, String content) {
         this.id = id;
