@@ -15,7 +15,7 @@ public class PostRepository {
         em.persist(post);
     }
 
-    public void findOne(Long id) {
-        em.find(Post.class, id);
+    public Post findOne(Long id) {
+        return em.find(Post.class, id);
     }
 }
