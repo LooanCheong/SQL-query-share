@@ -2,14 +2,15 @@ package single.sqlshare.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import single.sqlshare.domain.Post;
 
 @Repository
+@RequiredArgsConstructor
 public class PostRepository {
-
-    @PersistenceContext
-    private EntityManager em;
+    
+    private final EntityManager em;
 
     public void save(Post post) {
         em.persist(post);
