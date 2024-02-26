@@ -18,6 +18,8 @@ public class Post {
 
     private LocalDateTime postTime;
 
+    private String questionLink;
+
     @Column(columnDefinition = "TEXT")
     private String content;
 }
