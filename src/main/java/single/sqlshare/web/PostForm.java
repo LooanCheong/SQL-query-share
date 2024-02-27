@@ -1,17 +1,18 @@
 package single.sqlshare.web;
 
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 public class PostForm {
 
-    private String password;
     private LocalDateTime postTime;
     private String questionLink;
 
-    @NotEmpty(message = "내용은 필수로 입력해야 합니다.")
+    @NotBlank(message = "내용은 필수입니다")
     private String content;
 }
