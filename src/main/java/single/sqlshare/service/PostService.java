@@ -11,9 +11,9 @@ import single.sqlshare.repository.PostRepository;
 @RequiredArgsConstructor
 public class PostService {
 
-
     private final PostRepository postRepository;
 
+    @Transactional
     public Long save(Post post) {
         postRepository.save(post);
         return post.getId();
