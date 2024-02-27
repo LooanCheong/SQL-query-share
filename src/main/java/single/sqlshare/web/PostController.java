@@ -2,6 +2,7 @@ package single.sqlshare.web;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class PostController {
 
     private final PostService postService;
@@ -27,12 +29,16 @@ public class PostController {
     @PostMapping("/")
     public String post(@Valid PostForm form, BindingResult result) {
 
-        LocalDateTime dateTime = LocalDateTime.now();
+        if (result.hasErrors()) {
+            log.info("error");
+            return "post/post";
+        }
 
-        Post post = new Post(form.getPassword(), dateTime, form.getQuestionLink(), form.getContent());
+        Post post = new Post(LocalDateTime.now(), form.getQuestionLink(), form.getContent());
 
         postService.save(post);
+        log.info("post");
 
-        return "redirect:/post";
+        return "redirect:/";
     }
 }

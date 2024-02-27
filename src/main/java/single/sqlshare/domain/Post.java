@@ -17,8 +17,6 @@ public class Post {
     @Column(name = "post_id")
     private Long id;
 
-    private String password;
-
     private LocalDateTime postTime;
 
     private String questionLink;
@@ -27,8 +25,7 @@ public class Post {
     private String content;
 
     @Builder
-    public Post(String password, LocalDateTime postTime, String questionLink, String content) {
-        this.password = password;
+    public Post(LocalDateTime postTime, String questionLink, String content) {
         this.postTime = postTime;
         this.questionLink = questionLink;
         this.content = content;

@@ -26,7 +26,7 @@ class PostServiceTest {
     void save() {
 
         //Given
-        Post post = new Post("", LocalDateTime.now(), "", "");
+        Post post = new Post(LocalDateTime.now(), "", "");
 
         //When
         Long saveId = postService.save(post);
