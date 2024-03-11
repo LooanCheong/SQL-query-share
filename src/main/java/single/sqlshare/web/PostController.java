@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import single.sqlshare.domain.Post;
 import single.sqlshare.service.PostService;
 
@@ -27,7 +29,7 @@ public class PostController {
     }
 
     @PostMapping("/")
-    public String post(@Valid PostForm form, BindingResult result) {
+    public String post(@Valid PostForm form, BindingResult result, RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
             log.info("error");
@@ -37,8 +39,17 @@ public class PostController {
         Post post = new Post(LocalDateTime.now(), form.getQuestionLink(), form.getContent());
 
         postService.save(post);
-        log.info("post");
 
-        return "redirect:/";
+        redirectAttributes.addAttribute("postId", post.getId());
+
+        return "redirect:/{postId}";
+    }
+
+    @GetMapping("/{postId}")
+    private String getPost(@PathVariable("postId") Long postId, Model model) {
+        Post post = postService.findOne(postId);
+
+        model.addAttribute("post", post);
+        return "post/getPost";
     }
 }
